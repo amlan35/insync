@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InSyNC — Infrastructure Sustainability Network Collaborative</title>
+<style>
+  :root{
+    --ink:#16261f;
+    --moss:#2f6b4f;
+    --moss-dark:#1f4d38;
+    --sage:#7faa8c;
+    --sand:#f4f1e9;
+    --paper:#fbfaf6;
+    --line:#dfe3d8;
+    --accent:#c9a24b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Georgia','Times New Roman',serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.65;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  h1,h2,h3,nav,.eyebrow,.btn,.tag{font-family:'Helvetica Neue',Arial,sans-serif;}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:10;
+    background:rgba(251,250,246,.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.5px;color:var(--moss-dark);text-decoration:none;}
+  .brand .mark{
+    width:34px;height:34px;border-radius:50%;
+    background:conic-gradient(from 210deg,var(--moss),var(--sage),var(--accent),var(--moss));
+    display:inline-block;box-shadow:inset 0 0 0 4px var(--paper);
+  }
+  .brand small{display:block;font-weight:400;font-size:11px;letter-spacing:1px;color:var(--sage);text-transform:uppercase;}
+  nav a{margin-left:26px;text-decoration:none;color:var(--ink);font-size:14px;letter-spacing:.3px;}
+  nav a:hover{color:var(--moss);}
+  .nav-links{display:flex;align-items:center;}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    background:linear-gradient(160deg,var(--moss-dark),var(--moss) 60%,var(--sage));
+    color:#fff;overflow:hidden;
+  }
+  .hero:after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 80% 20%,rgba(201,162,75,.35),transparent 45%),
+               radial-gradient(circle at 10% 90%,rgba(255,255,255,.12),transparent 40%);
+  }
+  .hero .wrap{position:relative;z-index:1;padding:96px 28px 104px;}
+  .eyebrow{
+    display:inline-block;font-size:12px;letter-spacing:3px;text-transform:uppercase;
+    color:#e9efe6;border:1px solid rgba(255,255,255,.4);
+    padding:6px 14px;border-radius:40px;margin-bottom:26px;
+  }
+  .hero h1{font-size:clamp(34px,5.5vw,58px);line-height:1.08;font-weight:700;max-width:14ch;}
+  .hero .lede{font-size:clamp(17px,2vw,21px);margin-top:22px;max-width:60ch;color:#eef3ec;}
+  .cta-row{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;padding:13px 26px;border-radius:6px;font-size:15px;
+    text-decoration:none;font-weight:600;letter-spacing:.3px;transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .btn-primary{background:var(--accent);color:#1a1407;box-shadow:0 6px 18px rgba(0,0,0,.18);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55);}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);}
+
+  /* SECTIONS */
+  section{padding:78px 0;}
+  .section-head{max-width:62ch;margin-bottom:44px;}
+  .section-head .kicker{font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--moss);font-weight:700;}
+  .section-head h2{font-size:clamp(26px,3.4vw,38px);margin-top:12px;color:var(--ink);line-height:1.15;}
+  .section-head p{margin-top:16px;font-size:18px;color:#3c4a42;}
+
+  .alt{background:var(--sand);}
+
+  /* MISSION CALLOUT */
+  .mission{
+    border-left:5px solid var(--accent);
+    background:var(--paper);
+    padding:30px 34px;border-radius:0 10px 10px 0;
+    font-size:clamp(19px,2.4vw,25px);font-style:italic;color:var(--moss-dark);
+    box-shadow:0 10px 30px rgba(31,77,56,.07);
+  }
+
+  /* GRID CARDS */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:12px;
+    padding:28px 26px;transition:transform .18s ease,box-shadow .18s ease;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(31,77,56,.10);}
+  .card .num{font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:700;color:var(--accent);letter-spacing:1px;}
+  .card h3{font-size:19px;margin:10px 0 8px;color:var(--moss-dark);}
+  .card p{font-size:15.5px;color:#46544b;}
+
+  /* HOW IT WORKS */
+  .pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+  .pillar{padding:24px;border-radius:12px;background:#fff;border:1px solid var(--line);}
+  .pillar h3{color:var(--ink);font-size:17px;margin-bottom:6px;}
+  .pillar p{font-size:14.5px;color:#4b584f;}
+  .pillar .icon{font-size:22px;}
+
+  /* CADENCE STRIP */
+  .cadence{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin-top:10px;}
+  .beat{text-align:center;padding:26px 18px;background:var(--paper);border:1px solid var(--line);border-radius:12px;}
+  .beat .big{font-family:'Helvetica Neue',Arial,sans-serif;font-size:34px;font-weight:800;color:var(--moss);}
+  .beat .lbl{font-size:14.5px;color:#46544b;margin-top:6px;}
+
+  /* PRINCIPLES TAGS */
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;}
+  .tag{
+    font-size:13.5px;background:var(--paper);border:1px solid var(--sage);
+    color:var(--moss-dark);padding:8px 15px;border-radius:30px;
+  }
+
+  /* JOIN */
+  .join{
+    background:linear-gradient(155deg,var(--moss-dark),var(--moss));
+    color:#fff;border-radius:18px;padding:54px 44px;text-align:center;
+    box-shadow:0 20px 50px rgba(31,77,56,.22);
+  }
+  .join h2{font-size:clamp(26px,3.4vw,36px);}
+  .join p{max-width:54ch;margin:16px auto 30px;color:#eef3ec;font-size:18px;}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:#cdd6cf;padding:48px 0 40px;font-family:'Helvetica Neue',Arial,sans-serif;}
+  footer .cols{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;}
+  footer .brand{color:#fff;}
+  footer small{color:#8c998f;}
+  footer a{color:#cdd6cf;text-decoration:none;}
+  footer a:hover{color:#fff;}
+  .steer{font-size:14px;line-height:1.9;}
+  .divider{height:1px;background:#2a3a31;margin:30px 0 20px;}
+
+  @media (max-width:640px){
+    nav a{margin-left:16px;font-size:13px;}
+    .brand small{display:none;}
+    section{padding:56px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <span class="mark"></span>
+      <span>InSyNC<small>Infrastructure Sustainability Network Collaborative</small></span>
+    </a>
+    <div class="nav-links">
+      <nav>
+        <a href="#about">About</a>
+        <a href="#focus">Focus</a>
+        <a href="#how">How It Works</a>
+        <a href="#join">Join</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="wrap">
+    <h1>A community of practice for sustainable infrastructure.</h1>
+    <p class="lede">InSyNC is a neutral, technically grounded forum connecting industry, academia, and agencies — keeping momentum on embodied carbon and life-cycle thinking moving, no matter the political weather.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="mailto:peter.bacas@erg.com?subject=Interested%20in%20InSyNC">Get Involved</a>
+      <a class="btn btn-ghost" href="#about">Learn More</a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Why We Exist</span>
+      <h2>Filling a gap no one else is filling</h2>
+      <p>Agencies, industry, and researchers lack a central, neutral place to share what works, coordinate on implementation, and talk across traditionally siloed organizations. InSyNC is that place.</p>
+    </div>
+    <div class="mission">
+      "To connect and align stakeholders across industry, academia, and agencies in a shared community of practice that accelerates sustainable pavement and infrastructure solutions, reduces embodied carbon, and supports resilient, life-cycle-informed decision-making."
+    </div>
+  </div>
+</section>
+
+<!-- FOCUS -->
+<section id="focus" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Our Focus</span>
+      <h2>Anchored in pavements, expanding with momentum</h2>
+      <p>The technical scope starts where our members are strongest — pavement and highway sustainability — and grows deliberately into broader infrastructure as capacity builds.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="num">01</div>
+        <h3>Embodied Carbon</h3>
+        <p>Reducing the embodied carbon of materials — asphalt, concrete, aggregates, and binders across the pavement system.</p>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>PCRs &amp; EPDs</h3>
+        <p>Advancing and harmonizing Product Category Rules and Environmental Product Declarations across materials and regions.</p>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>Policy Development</h3>
+        <p>Engaging early on state and federal policy, "Buy Clean"-type procurement, and legislation — before it's finalized.</p>
+      </div>
+      <div class="card">
+        <div class="num">04</div>
+        <h3>LCA Methodology</h3>
+        <p>Supporting consistent, science-based cradle-to-grave and cradle-to-gate life-cycle assessment approaches.</p>
+      </div>
+      <div class="card">
+        <div class="num">05</div>
+        <h3>Knowledge Transfer</h3>
+        <p>Moving from pilot projects to standard practice — documenting successes and failures and building agency capacity.</p>
+      </div>
+      <div class="card">
+        <div class="num">06</div>
+        <h3>Resilience &amp; Co-Benefits</h3>
+        <p>Communicating the non-carbon value of sustainable practice: durability, lifecycle cost, and performance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How It Works</span>
+      <h2>Lightweight by design</h2>
+      <p>An independent, ad hoc collaborative — no formal nonprofit, no heavy administration. Just a durable forum built to deliver value immediately and outlast any single administration.</p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar"><div class="icon">🤝</div><h3>Cross-Sector</h3><p>Contractors, material producers, consultants, researchers, DOTs, trade associations, and NGOs at one table.</p></div>
+      <div class="pillar"><div class="icon">🧭</div><h3>Apolitical &amp; Durable</h3><p>Structured to avoid dependence on any single funding source or political moment.</p></div>
+      <div class="pillar"><div class="icon">🌱</div><h3>Start Small</h3><p>Begin focused and manageable; expand membership, scope, and activity as momentum builds.</p></div>
+      <div class="pillar"><div class="icon">📚</div><h3>A Body of Knowledge</h3><p>A clearinghouse of guidance, data, and case studies — the "how," not just the "why."</p></div>
+    </div>
+
+    <div class="section-head" style="margin-top:60px;margin-bottom:24px;">
+      <span class="kicker">Meeting Cadence</span>
+      <h2>Just enough to stay in sync</h2>
+    </div>
+    <div class="cadence">
+      <div class="beat"><div class="big">2–3×</div><div class="lbl">Virtual meetings per year</div></div>
+      <div class="beat"><div class="big">1×</div><div class="lbl">In-person, co-located with an industry event</div></div>
+      <div class="beat"><div class="big">Monthly</div><div class="lbl">Core steering group calls</div></div>
+      <div class="beat"><div class="big">Ongoing</div><div class="lbl">Async sharing &amp; working groups</div></div>
+    </div>
+
+    <div class="section-head" style="margin-top:60px;margin-bottom:18px;">
+      <span class="kicker">Guiding Principles</span>
+      <h2>The way we work</h2>
+    </div>
+    <div class="tags">
+      <span class="tag">Broadly adoptable &amp; low-burden</span>
+      <span class="tag">Realistic about outcomes</span>
+      <span class="tag">Durable beyond politics</span>
+      <span class="tag">Start small, grow deliberately</span>
+      <span class="tag">Minimize duplication</span>
+      <span class="tag">Communicate in plain language</span>
+      <span class="tag">Maintain ongoing dialogue</span>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section id="join" class="alt">
+  <div class="wrap">
+    <div class="join">
+      <h2>Help keep the momentum going</h2>
+      <p>InSyNC is open and voluntary. If you work on sustainable infrastructure — in industry, academia, or an agency — there's a seat for you in the conversation.</p>
+      <a class="btn btn-primary" href="mailto:peter.bacas@erg.com?subject=Interested%20in%20InSyNC">Express Interest</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="#top" style="display:inline-flex;align-items:center;gap:12px;">
+          <span class="mark"></span>
+          <span style="font-weight:700;letter-spacing:.5px;">InSyNC</span>
+        </a>
+        <p style="max-width:34ch;margin-top:14px;font-size:14px;">Infrastructure Sustainability Network Collaborative — a cross-sector community of practice.</p>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <small>© 2026 Infrastructure Sustainability Network Collaborative (InSyNC). An independent, ad hoc collaborative.</small>
+  </div>
+</footer>
+
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                        

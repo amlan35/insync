@@ -1,0 +1,16 @@
+# Working / source docs — do not ship to the public site
+InSyNC - Contact List (from Google Drive).md
+InSyNC - Scoping Document (from Google Drive).md
+InSyNC-embed.min.html
+InSyNC-landing-page.html
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+.vscode/
+.idea/
+
+# Vercel
+.vercel
